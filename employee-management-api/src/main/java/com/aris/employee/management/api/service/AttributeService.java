@@ -23,7 +23,7 @@ public class AttributeService {
 
     @Transactional(readOnly = true)
     public List<GetAttributeDTO> getAttributes() {
-        List<Attribute> attributes = attributeRepository.findAllByOrderByIdDesc();
+        List<Attribute> attributes = attributeRepository.findAllByOrderByIdAsc();
 
         return attributeMapper.map(attributes);
     }
@@ -59,7 +59,12 @@ public class AttributeService {
         attribute.setValue(value);
     }
 
+    @Transactional
     public void deleteAttribute(Integer id) {
+        Attribute attribute = findById(id);
+
+        attribute.removeEmployees();
+
         attributeRepository.deleteById(id);
     }
 }

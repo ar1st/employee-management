@@ -25,15 +25,12 @@ public class Attribute {
         this.value = value;
     }
 
-    @ManyToMany
-    @JoinTable(
-            name="attributes_employees"
-            , joinColumns={
-            @JoinColumn(name="attribute_id")
-    }
-            , inverseJoinColumns={
-            @JoinColumn(name="user_id")
-    }
-    )
+    @ManyToMany(mappedBy = "attributes")
     private Set<Employee> employees;
+
+    public void removeEmployees() {
+        for (Employee employee : employees) {
+            employee.getAttributes().remove(this);
+        }
+    }
 }

@@ -29,7 +29,16 @@ public class Employee {
 
     private String yCoordinate;
 
-    @ManyToMany(mappedBy = "employees")
+    @ManyToMany(cascade = CascadeType.DETACH)
+    @JoinTable(
+            name="employees_attributes"
+            , joinColumns={
+            @JoinColumn(name="user_id")
+    }
+            , inverseJoinColumns={
+            @JoinColumn(name="attribute_id")
+    }
+    )
     private Set<Attribute> attributes;
 
 }

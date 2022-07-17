@@ -11,5 +11,5 @@ public interface AttributeRepository extends JpaRepository<Attribute, Integer> {
 
     boolean existsByNameAndValue(String name, String value);
 
-    List<Attribute> findAllByOrderByIdDesc();
+    List<Attribute> findAllByOrderByIdAsc();
 }

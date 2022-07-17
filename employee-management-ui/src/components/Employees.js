@@ -5,7 +5,6 @@ import { SAVE_EMPLOYEES_PAGE_URL } from "../lib/url/pageUrlConstants";
 import EmployeesTable from "./tables/EmployeesTable";
 
 export default function Employees() {
-    console.log('here');
     return (
         <div>
             <Link className='mb-3' to={SAVE_EMPLOYEES_PAGE_URL}>

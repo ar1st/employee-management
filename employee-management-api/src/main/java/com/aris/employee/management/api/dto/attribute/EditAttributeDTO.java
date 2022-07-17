@@ -3,13 +3,13 @@ package com.aris.employee.management.api.dto.attribute;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Getter @Setter
 public class EditAttributeDTO {
 
     @NotEmpty
-    @Max(value = 50)
+    @Size(max = 50)
     private String value;
 }

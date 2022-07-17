@@ -8,3 +8,6 @@ export const PUT_ATTRIBUTE_URL = (id) => `${BASE_URL}/attributes/${id}`
 export const DELETE_ATTRIBUTE_URL = (id) => `${BASE_URL}/attributes/${id}`
 
 export const GET_EMPLOYEES_URL = `${BASE_URL}/employees`
+export const GET_EMPLOYEE_URL = (id) => `${BASE_URL}/employees/${id}`
+export const POST_EMPLOYEES_URL = `${BASE_URL}/employees`
+export const PUT_EMPLOYEE_URL = (id) => `${BASE_URL}/employees/${id}`
