@@ -1,0 +1,54 @@
+
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { useState, useEffect } from 'react';
+import LoadingSpinner from '../utils/LoadingSpinner';
+import { axiosGet} from '../../lib/axios';
+import { GET_EMPLOYEES_URL } from '../../lib/url/apiUrlConstants';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import { SAVE_EMPLOYEES_PAGE_URL } from '../../lib/url/pageUrlConstants';
+
+export default function EmployeesTable() {
+    const [tableData, setTableData] = useState(null)
+
+    const actionsColumnBody = (rowData) => {
+        return (
+            <>
+                <Button variant="link">
+                    <Link to={SAVE_EMPLOYEES_PAGE_URL} state={{ id: rowData.id }}>
+                        Edit
+                    </Link>
+                </Button>
+            </>
+        )
+    }
+
+    const booleanColumnBody = (rowData) => {
+        return rowData.car ? 'Yes' : 'No'
+    }
+
+    useEffect(() => {
+        axiosGet(GET_EMPLOYEES_URL)
+            .then(response => {
+                const data = response.data.data;
+
+                setTableData(data)
+            })
+    }, [])
+    
+    return (
+         tableData ? <div >
+            <DataTable value={tableData} responsiveLayout="scroll" >
+                <Column field="name" header="Name" className='table-row'></Column>
+                <Column field="dateOfBirth" header="Date Of Birth" className='table-row'></Column>
+                <Column field="car" header="Car" className='table-row' body={booleanColumnBody}></Column>
+                <Column field="xcoordinate" header="X Coordinate" className='table-row'></Column>
+                <Column field="ycoordinate" header="Y Coordinate" className='table-row'></Column>
+                <Column field="actions" header="" className='table-row' body={actionsColumnBody}></Column>
+            </DataTable>
+        </div>
+        : <LoadingSpinner />
+
+    )
+}

@@ -1,0 +1,36 @@
+.global {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  padding: 1em
+}
+
+.title {
+  padding-left: 10px;
+}
+
+ul.navigation-bar li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+}
+
+ul.navigation-bar {
+  background-color: #111;
+  padding: 0;
+}
+
+ul.navigation-bar li a {
+  color: #FFF;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 20px;
+  display: inline-block;
+}
+
+.table-row {
+  width: 20%;
+}
