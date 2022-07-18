@@ -78,4 +78,10 @@ public class EmployeeService {
         fillEmployee(employee, name, dateOfBirth, hasCar, xCoordinate, yCoordinate, attributesIds);
 
     }
+
+    public List<GetEmployeeDTO> getEmployeesByAttributeId(Integer attributeId) {
+        List<Employee> employees = employeeRepository.findAllByAttributesId(attributeId);
+
+        return employeeMapper.map(employees);
+    }
 }

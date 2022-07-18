@@ -22,8 +22,14 @@ public class EmployeesController {
     private final EmployeeService employeeService;
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<GetEmployeeDTO>>> getEmployees() {
-        List<GetEmployeeDTO> employees = employeeService.getEmployees();
+    public ResponseEntity<ApiResponse<List<GetEmployeeDTO>>> getEmployees(@RequestParam(required = false) Integer attributeId) {
+
+        List<GetEmployeeDTO> employees;
+        if (attributeId == null) {
+            employees = employeeService.getEmployees();
+        } else {
+            employees = employeeService.getEmployeesByAttributeId(attributeId);
+        }
 
         return ResponseEntity.ok(new ApiResponse<>(employees));
     }

@@ -34,3 +34,8 @@ ul.navigation-bar li a {
 .table-row {
   width: 20%;
 }
+
+.map-container {
+  width: 1500px;
+  height: 700px;
+}
