@@ -2,6 +2,7 @@ package com.aris.employee.management.api.service;
 
 import com.aris.employee.management.api.dto.attribute.GetAttributeDTO;
 import com.aris.employee.management.api.exception.AttributeExistsException;
+import com.aris.employee.management.api.exception.EntityNotFoundException;
 import com.aris.employee.management.api.mapper.AttributeMapper;
 import com.aris.employee.management.api.model.Attribute;
 import com.aris.employee.management.api.repository.AttributeRepository;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RequiredArgsConstructor

@@ -2,6 +2,7 @@ package com.aris.employee.management.api.service;
 
 import com.aris.employee.management.api.dto.employee.GetEmployeeDTO;
 import com.aris.employee.management.api.dto.employee.GetEmployeeWithAttributesDTO;
+import com.aris.employee.management.api.exception.EntityNotFoundException;
 import com.aris.employee.management.api.mapper.EmployeeMapper;
 import com.aris.employee.management.api.model.Attribute;
 import com.aris.employee.management.api.model.Employee;
@@ -11,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;

@@ -2,6 +2,7 @@ package com.aris.employee.management.api.handler;
 
 import com.aris.employee.management.api.dto.EmptyResponseDTO;
 import com.aris.employee.management.api.exception.AttributeExistsException;
+import com.aris.employee.management.api.exception.EntityNotFoundException;
 import com.aris.employee.management.api.rest.ApiResponse;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -49,6 +50,17 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    protected ResponseEntity<ApiResponse<EmptyResponseDTO>> handle(EntityNotFoundException ex) {
+        ApiResponse<EmptyResponseDTO> response = new ApiResponse<>(new EmptyResponseDTO(), HttpStatus.BAD_REQUEST);
+
+        response.setErrorMessage("Something went wrong. Please refresh the page and try again");
+
+        return new ResponseEntity<>(response, response.getHttpStatus());
+    }
+
+
 
 
 }
