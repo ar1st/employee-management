@@ -3,14 +3,16 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { useState, useEffect } from 'react';
 import LoadingSpinner from '../utils/LoadingSpinner';
-import { axiosGet} from '../../lib/axios';
+import { axiosGet } from '../../lib/axios';
 import { GET_EMPLOYEES_URL } from '../../lib/url/apiUrlConstants';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { SAVE_EMPLOYEES_PAGE_URL } from '../../lib/url/pageUrlConstants';
+import useCatch from '../../hooks/useCatch';
 
 export default function EmployeesTable() {
     const [tableData, setTableData] = useState(null)
+    const { cWrapper } = useCatch()
 
     const actionsColumnBody = (rowData) => {
         return (
@@ -29,16 +31,19 @@ export default function EmployeesTable() {
     }
 
     useEffect(() => {
-        axiosGet(GET_EMPLOYEES_URL)
-            .then(response => {
-                const data = response.data.data;
+        cWrapper(() =>
+            axiosGet(GET_EMPLOYEES_URL)
+                .then(response => {
+                    const data = response.data.data;
 
-                setTableData(data)
-            })
+                    setTableData(data)
+                })
+        )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    
+
     return (
-         tableData ? <div >
+        tableData ? <div >
             <DataTable value={tableData} responsiveLayout="scroll" >
                 <Column field="name" header="Name" className='table-row'></Column>
                 <Column field="dateOfBirth" header="Date Of Birth" className='table-row'></Column>
@@ -48,7 +53,7 @@ export default function EmployeesTable() {
                 <Column field="actions" header="" className='table-row' body={actionsColumnBody}></Column>
             </DataTable>
         </div>
-        : <LoadingSpinner />
+            : <LoadingSpinner />
 
     )
 }

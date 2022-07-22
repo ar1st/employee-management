@@ -39,3 +39,11 @@ ul.navigation-bar li a {
   width: 1500px;
   height: 700px;
 }
+
+.page-title {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #f2f2f2;
+  font-weight: 300;
+}

@@ -7,10 +7,11 @@ const center = { lat: 40.638103, lng: 22.945167 }
 const originMarkerIcon = 'http://maps.google.com/mapfiles/kml/pushpin/ltblu-pushpin.png'
 const libraries = ['places']
 
+//AIzaSyAR8AiRUgmjWufVV_y1Jeji0WB7j3kY7dQ
 export default function MapContainer({ origin, destinations }) {
     const [map, setMap] = useState(/** @type google.maps.Map */(null))
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: '',
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries
     })
     const [spots, setSpots] = useState([])

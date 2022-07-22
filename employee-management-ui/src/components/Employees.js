@@ -7,6 +7,8 @@ import EmployeesTable from "./tables/EmployeesTable";
 export default function Employees() {
     return (
         <div>
+            <h1 className='page-title'>Employees</h1>
+
             <Link className='mb-3' to={SAVE_EMPLOYEES_PAGE_URL}>
                 <Button>Add Employee</Button>
             </Link>

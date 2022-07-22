@@ -17,7 +17,7 @@ const initialData = {
 }
 
 export default function SaveAttributeForm() {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({defaultValues: initialData});
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({ defaultValues: initialData });
     const navigate = useNavigate();
     const { cWrapper } = useCatch()
     const { setAlert } = useAlert()
@@ -40,7 +40,7 @@ export default function SaveAttributeForm() {
 
     const editAttribute = (data) => {
         cWrapper(() =>
-            axiosPut(PUT_ATTRIBUTE_URL(location.state.id), {value: data.value})
+            axiosPut(PUT_ATTRIBUTE_URL(location.state.id), { value: data.value })
                 .then(() => {
                     navigate(ATTRIBUTES_PAGE_URL)
 
@@ -66,23 +66,27 @@ export default function SaveAttributeForm() {
     useEffect(() => {
 
         if (location.state) {
-            axiosGet(GET_ATTRIBUTE_URL(location.state.id))
-                .then(response => {
-                    const data = response.data.data
+            cWrapper(() =>
+                axiosGet(GET_ATTRIBUTE_URL(location.state.id))
+                    .then(response => {
+                        const data = response.data.data
 
-                    reset({
-                        name: data.name,
-                        value: data.value
+                        reset({
+                            name: data.name,
+                            value: data.value
+                        })
+
+                        setMode('edit')
                     })
-
-                    setMode('edit')
-                })
+            )
         }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [reset, location])
 
     return (
         <Form id='attributeForm' onSubmit={handleSubmit(onSubmit)} >
+            <h1 className='page-title'>Save Attribute</h1>
             <Form.Group>
                 <Form.Label>Name</Form.Label>
                 <Form.Control

@@ -4,6 +4,7 @@ import { GET_ATTRIBUTES_URL, GET_EMPLOYEES_URL } from "../../lib/url/apiUrlConst
 import LoadingSpinner from "../utils/LoadingSpinner"
 import Select from 'react-select'
 import MapContainer from "./MapContainer"
+import useCatch from "../../hooks/useCatch"
 
 export default function MapBrowser() {
     const [attributes, setAttributes] = useState(null)
@@ -11,15 +12,18 @@ export default function MapBrowser() {
     const [isEmployeeSelected, setEmployeeSelected] = useState(false)
     const [origin, setOrigin] = useState({})
     const [destinations, setDestinations] = useState({})
+    const { cWrapper } = useCatch()
 
     const handleAttributeChange = (value) => {
         setEmployeeSelected(false)
 
-        axiosGet(GET_EMPLOYEES_URL,
-            { attributeId: value.value }
-        ).then(response => {
-            setEmployees(response.data.data.map(it => ({ label: it.name, id: it.id, xcoordinate: it.xcoordinate, ycoordinate: it.ycoordinate, car: it.car })))
-        })
+        cWrapper(() =>
+            axiosGet(GET_EMPLOYEES_URL,
+                { attributeId: value.value }
+            ).then(response => {
+                setEmployees(response.data.data.map(it => ({ label: it.name, id: it.id, xcoordinate: it.xcoordinate, ycoordinate: it.ycoordinate, car: it.car })))
+            })
+        )
     }
 
     const handleEmployeeChange = async (selectedEmployee) => {
@@ -34,12 +38,15 @@ export default function MapBrowser() {
     }
 
     useEffect(() => {
-        axiosGet(GET_ATTRIBUTES_URL)
-            .then(response => {
-                const data = response.data.data;
+        cWrapper(() =>
+            axiosGet(GET_ATTRIBUTES_URL)
+                .then(response => {
+                    const data = response.data.data;
 
-                setAttributes(data.map(it => ({ value: it.id, label: `${it.name}: ${it.value}` })))
-            })
+                    setAttributes(data.map(it => ({ value: it.id, label: `${it.name}: ${it.value}` })))
+                })
+        )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

@@ -5,12 +5,14 @@ import { SAVE_ATTRIBUTE_PAGE_URL } from "../lib/url/pageUrlConstants";
 
 export default function Attributes() {
 
-  return (
-    <div>
-      <Link className='mb-3' to={SAVE_ATTRIBUTE_PAGE_URL}>
-        <Button>Add Attribute</Button>
-      </Link>
-      <AttributesTable/>
-    </div>
-  );
+    return (
+        <div>
+            <h1 className='page-title'>Attributes</h1>
+            
+            <Link className='mb-3' to={SAVE_ATTRIBUTE_PAGE_URL}>
+                <Button>Add Attribute</Button>
+            </Link>
+            <AttributesTable />
+        </div>
+    );
 }

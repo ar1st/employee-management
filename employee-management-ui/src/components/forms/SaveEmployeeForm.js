@@ -106,6 +106,7 @@ export default function SaveEmployeeForm() {
 
     return (
         <Form id='employeeForm' onSubmit={handleSubmit(onSubmit)} >
+            <h1 className='page-title'>Save Employee</h1>
             <Form.Group>
                 <Form.Label>Name</Form.Label>
                 <Form.Control

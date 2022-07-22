@@ -9,20 +9,24 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { useAlert } from '../utils/GlobalAlert';
 import { SAVE_ATTRIBUTE_PAGE_URL } from '../../lib/url/pageUrlConstants';
+import useCatch from '../../hooks/useCatch';
 
 export default function AttributesTable() {
     const [tableData, setTableData] = useState(null)
     const { setAlert } = useAlert()
+    const { cWrapper } = useCatch()
 
     const handleDelete = (rowData) => {
-        axiosDelete(DELETE_ATTRIBUTE_URL(rowData.id))
-            .then(() => {
-                setTableData(previous => previous.filter(it => it.id !== rowData.id))
-                setAlert({
-                    message: 'Attribute deleted',
-                    status: 'success'
+        cWrapper(() =>
+            axiosDelete(DELETE_ATTRIBUTE_URL(rowData.id))
+                .then(() => {
+                    setTableData(previous => previous.filter(it => it.id !== rowData.id))
+                    setAlert({
+                        message: 'Attribute deleted',
+                        status: 'success'
+                    })
                 })
-            })
+        )
     }
     const actionsColumnBody = (rowData) => {
         return (
@@ -44,12 +48,15 @@ export default function AttributesTable() {
     }
 
     useEffect(() => {
-        axiosGet(GET_ATTRIBUTES_URL)
-            .then(response => {
-                const data = response.data.data;
+        cWrapper(() =>
+            axiosGet(GET_ATTRIBUTES_URL)
+                .then(response => {
+                    const data = response.data.data;
 
-                setTableData(data)
-            })
+                    setTableData(data)
+                })
+        )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
