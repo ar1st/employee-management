@@ -8,6 +8,7 @@ export const axiosGet = async (url, parameters) => {
         params: { ...parameters },
     })
         .catch((error) => {
+            console.log('here');
             if (!error.response) {
                 error.errorMessage = 'Something went wrong. Please contant a System Administrator';
             } else {

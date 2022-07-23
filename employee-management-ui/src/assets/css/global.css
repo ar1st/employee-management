@@ -47,3 +47,9 @@ ul.navigation-bar li a {
   border-bottom: 2px solid #f2f2f2;
   font-weight: 300;
 }
+
+
+.custom-icon {
+    color: #116AAB;
+    font-size: 1.3rem;
+}

@@ -31,17 +31,11 @@ export default function AttributesTable() {
     const actionsColumnBody = (rowData) => {
         return (
             <>
+                <Link to={SAVE_ATTRIBUTE_PAGE_URL} state={{ id: rowData.id }}>
+                    <i className="bi bi-pencil custom-icon mr-3" title='Edit' />
+                </Link>
 
-                <Button variant="link">
-                    <Link to={SAVE_ATTRIBUTE_PAGE_URL} state={{ id: rowData.id }}>
-                        Edit
-                    </Link>
-                </Button>
-
-                <Button variant='link' onClick={() => handleDelete(rowData)}>
-                    Delete
-                </Button>
-
+                <i className="bi bi-trash custom-icon mr-3" title='Delete' onClick={() => handleDelete(rowData)} />
             </>
 
         )
@@ -56,7 +50,7 @@ export default function AttributesTable() {
                     setTableData(data)
                 })
         )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

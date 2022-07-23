@@ -17,11 +17,9 @@ export default function EmployeesTable() {
     const actionsColumnBody = (rowData) => {
         return (
             <>
-                <Button variant="link">
-                    <Link to={SAVE_EMPLOYEES_PAGE_URL} state={{ id: rowData.id }}>
-                        Edit
-                    </Link>
-                </Button>
+                <Link to={SAVE_EMPLOYEES_PAGE_URL} state={{ id: rowData.id }}>
+                    <i className="bi bi-pencil custom-icon mr-3" title='Edit' />
+                </Link>
             </>
         )
     }
@@ -39,7 +37,7 @@ export default function EmployeesTable() {
                     setTableData(data)
                 })
         )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
