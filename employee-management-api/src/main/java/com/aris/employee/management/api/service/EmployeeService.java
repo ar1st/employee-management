@@ -48,7 +48,6 @@ public class EmployeeService {
     @Transactional
     public void createEmployee(String name, Date dateOfBirth, boolean hasCar, String xCoordinate,
                                String yCoordinate, List<Integer> attributesIds) {
-        //todo validate attributes
 
         Employee employee = new Employee();
 

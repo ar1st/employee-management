@@ -30,9 +30,6 @@ public class AttributeService {
 
     @Transactional
     public void createAttribute(String name, String value) {
-        //todo add validation
-        //check empty params
-        //check if exists by name
 
         if (attributeRepository.existsByNameAndValue(name, value)) {
             throw new AttributeExistsException();
