@@ -129,7 +129,7 @@ export default function SaveEmployeeForm() {
                             message: 'Choose date of birth'
                         }
                     }}
-                    render={({ field: { onChange, onBlur, value, ref } }) =>
+                    render={({ field: { onChange, value} }) =>
                         <DatePicker
                             placeholderText="Select birth date"
                             onChange={onChange}
@@ -183,6 +183,12 @@ export default function SaveEmployeeForm() {
                 <Controller
                     control={control}
                     name='selectedAttributes'
+                    rules={{
+                        required: {
+                            value: true,
+                            message: "Select an attribute. If none exist, create one first."
+                        }
+                    }}
                     render={({ field: { onChange, onBlur, value } }) =>
                         <Select
                             onChange={onChange}
@@ -195,7 +201,7 @@ export default function SaveEmployeeForm() {
                             options={attributes && attributes.map(it => ({ value: it.id, label: `${it.name}: ${it.value}` }))}
                         />}
                 />
-                {errors.value && <small className='text-danger'>{errors.value.message}</small>}
+                {errors.selectedAttributes && <small className='text-danger'>{errors.selectedAttributes.message}</small>}
             </Form.Group>
 
             <Button type='submit' className='btn btn-primary mt-3'>
